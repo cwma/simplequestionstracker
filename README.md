@@ -7,10 +7,11 @@ This is my first Meteor app so do let me know if I did anything the "wrong" way.
 
 demo available at http://simplequestiontracker.meteor.com/
 
-TODO:
-    Discretionary and role based access control system
-    Allow creation of "Rooms" by registered users, who would be given admin rights over created room.
-    Simple access control system for admins to give other users moderation and or speaker rights
-    Moderators can approve, reject or delete questions
-    speakers can post responses to questions
-    Rooms accessed publicly with a hashed url
+Todo
+
+1. Discretionary and role based access control system
+2. Allow creation of "Rooms" by registered users, who would be given admin rights over created room.
+3. Simple access control system for admins to give other users moderation and or speaker rights
+4. Moderators can approve, reject or delete questions
+5. speakers can post responses to questions
+6. Rooms accessed publicly with a hashed url
