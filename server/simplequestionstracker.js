@@ -1,63 +1,61 @@
 Meteor.startup(function(){
-
-	Accounts.config({forbidClientAccountCreation :true})
-	Meteor.users.remove({});
-	Accounts.createUser({
-		username: "admin",
-		email: "email@email.com",
-		password: "password"
-	});
+    
+    Accounts.config({forbidClientAccountCreation :true})
+    Meteor.users.remove({});
+    Accounts.createUser({
+        username: "admin",
+        email: "email@email.com",
+        password: "password"
+    });
     ActiveUsers.remove({});
-	//Questions.remove({});
-	
-	Questions.allow({
-		insert: function(userId, doc) {
-			if(doc.approve == true) {
-				return(userId);
-			} else {
-				return true;
-			}
-		},
-		update: function(userId, doc) {
-			return(userId);
-		},
-		remove: function(userId, doc) {
-			return(userId);
-		}
-	});
-	
-	Questions.deny({
-		insert: function(userId, doc) {
-			if(doc.approved == true) {
-				if(userId) {
-					console.log("allowed");
-					return false;
-				} else {
-					console.log("Bypass Attempt Detected");
-					return true;
-				}
-			} else {
-				return false;
-			}
-		},
-		update: function(userId, docs, fields, modifier) {
-			if(userId){
-				return false;
-			} else {
-				return true;
-			}
-		},
-		remove: function(userId, docs, fields, modifier) {
-			if(userId){
-				return false;
-			} else {
-				return true;
-			}
-		}
-	});
-	
-	//method to count how many users are online by murilopolese
-	//source: https://github.com/murilopolese/howmanypeoplearelooking
+    //Questions.remove({});
+    
+    Questions.allow({
+        insert: function(userId, doc) {
+            if(doc.approved == true) {
+                return(userId);
+            } else {
+                return true;
+            }
+        },
+        update: function(userId, doc) {
+            return(userId);
+        },
+        remove: function(userId, doc) {
+            return(userId);
+        }
+    });
+    
+    Questions.deny({
+        insert: function(userId, doc) {
+            if(doc.approved == true) {
+                if(userId) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        },
+        update: function(userId, docs, fields, modifier) {
+            if(userId){
+                return false;
+            } else {
+                return true;
+            }
+        },
+        remove: function(userId, docs, fields, modifier) {
+            if(userId){
+                return false;
+            } else {
+                return true;
+            }
+        }
+    });
+    
+    //method to count how many users are online by murilopolese
+    //source: https://github.com/murilopolese/howmanypeoplearelooking
     Meteor.default_server.stream_server.register( Meteor.bindEnvironment( function(socket) {
         var intervalID = Meteor.setInterval(function() {
             if (socket.meteor_session) {
